@@ -25,4 +25,7 @@ services:
         target: /etc/init.d/rex
         bind:
           create_host_path: true
+      - type: bind
+        source: /dev/shm
+        target: /dev/shm
     restart: unless-stopped
