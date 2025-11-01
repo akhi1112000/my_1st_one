@@ -1,5 +1,9 @@
 FROM wisniax/ros-rover-base:latest
 
+# devcontainers ***fix*** by ubuntu devs...
+# https://askubuntu.com/questions/1513927/ubuntu-24-04-docker-images-now-includes-user-ubuntu-with-uid-gid-1000
+RUN userdel -r ubuntu
+
 # Dockerfile for ROS-JAZZY
 ARG USERNAME='rex'
 ARG PASSWORD='changeme'
@@ -10,7 +14,7 @@ ENV ROS_ENABLE_AUTOSTART=0
 ENV ROS_BUILD_ON_STARTUP=on-failure
 
 # Create user
-RUN useradd -m -s /bin/bash -g 1000 ${USERNAME}
+RUN useradd -m -s /bin/bash ${USERNAME}
 RUN echo "${USERNAME}:${PASSWORD}" | chpasswd
 RUN usermod -aG sudo ${USERNAME}
 
